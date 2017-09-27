@@ -1,0 +1,94 @@
+@font-face{
+    font-family: "Arwing";
+    src: url("../fonts/Arwing.eot");
+    src: url("../fonts/Arwing.ttf") format("truetype");
+}
+body {
+    height: 100%;
+    background: #000;
+    font-family: 'Raleway', sans-serif;
+    position: relative;
+    color: #231C23;
+    background-color: #000;
+}
+#flexbox {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+#content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+header {
+    width: 100%;
+    padding: 2vh 0 2vh;
+    position: relative;
+    font-family: "Arwing", serif;
+    text-align: center;
+}
+h1, h2{
+    font-weight: bold;
+    -webkit-text-stroke: .2vh #0F0CA0;
+    background: -webkit-linear-gradient(#186B2F, #F5FC09);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+h1 {
+    font-size: 10vw;
+}
+h2 {
+    position: relative;
+    font-size: 6vw;
+    margin-top: -4.4vh;
+    left: 4.1vw;
+}
+#win-message {
+    display: block;
+    text-align: center;
+    padding-top: 2vw;
+    font-size: 3vw;
+    font-weight: bold;
+    color: #186B2F;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    border: 2px solid #0F0CA0;
+}
+#game {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#display,
+#interface {
+    display: inline-block;
+    width: 49.7%;
+    text-align: center;
+    color: #186B2F;
+    padding: 2vw 0 2vw 0;
+}
+footer {
+    width: 100%;
+    height: 7vh;
+}
+#copyright {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    height: 2vh;
+}
+#copyright b {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5vh;
+    line-height: 7vh;
+    color: #C4C4C4;
+}
