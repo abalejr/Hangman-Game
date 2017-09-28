@@ -1,20 +1,20 @@
 $(document).ready(function(){
     //establish the list of words as a  Global variable
-    var words = [{word:"Corneria", img:"", win:"TEST", song:""},
-                {word:"Meteo", img:"", win:"TEST", song:""},
-                {word:"Sector Y", img:"", win:"TEST", song:""},
-                {word:"Fichina", img:"", win:"TEST", song:""},
-                {word:"Katina", img:"", win:"TEST", song:""},
-                {word:"Aquas", img:"", win:"TEST", song:""},
-                {word:"Sector X", img:"", win:"TEST", song:""},
-                {word:"Solar", img:"", win:"TEST", song:""},
-                {word:"Zoness", img:"", win:"TEST", song:""},
-                {word:"Titania", img:"", win:"TEST", song:""},
-                {word:"Macbeth", img:"", win:"TEST", song:""},
-                {word:"Sector Z", img:"", win:"TEST", song:""},
-                {word:"Bolse", img:"", win:"TEST", song:""},
-                {word:"Area Six", img:"", win:"TEST", song:""},
-                {word:"Venom", img:"", win:"TEST", song:""}];
+    var words = [{word:"Corneria", img:"", win:"Former Army Base", song:""},
+                {word:"Meteo", img:"", win:"Ateroid Belt", song:""},
+                {word:"Sector Y", img:"", win:"Enter Star Wolf", song:""},
+                {word:"Fichina", img:"", win:"Former Defense Base", song:""},
+                {word:"Katina", img:"", win:"Frontline Base", song:""},
+                {word:"Aquas", img:"", win:"Terror of the Deep", song:""},
+                {word:"Sector X", img:"", win:"Space Base", song:""},
+                {word:"Solar", img:"", win:"The Sun", song:""},
+                {word:"Zoness", img:"", win:"Toxic Waste Area", song:""},
+                {word:"Titania", img:"", win:"Arid Desert", song:""},
+                {word:"Macbeth", img:"", win:"Venom Army Supply Base", song:""},
+                {word:"Sector Z", img:"", win:"Great Fox Ambush", song:""},
+                {word:"Bolse", img:"", win:"The Last Hurrah", song:""},
+                {word:"Area Six", img:"", win:"Defense Station", song:""},
+                {word:"Venom", img:"", win:"Andross' Homeworld", song:""}];
     //establish currentWord and its div as Global Variables
     var currentWord = "";
     var currentWordDiv = $("#current-word");
