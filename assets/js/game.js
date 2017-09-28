@@ -31,6 +31,21 @@ $(document).ready(function(){
     //Run this when the page loads, so players can jump in right away
     newCurrentWord();
 
+    
+    //Listen for keyboard key to be released, establish behavior
+    $(document).keyup(function(e) {
+        //First, start looping through each letter of currentWord
+        for (var i = 0; i < currentWord.length; i++) {
+            //Check to see if that character is present in currentWord
+            if (String.fromCharCode(e.which) == currentWord[i]) {
+                //Define a variable for the <span> containing a matched letter
+                var matchedLetterSpan = $("#" + i.toString());
+                //Show that character
+                matchedLetterSpan.show();
+            }
+        }
+    });
+
     //TESTS - everything below here is added just to test functionality
     //Handler below makes it easy to test newCurrentWord function - just click anywhere on the page to run newCurrentWord
     $(document).click(function() {
