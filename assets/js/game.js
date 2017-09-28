@@ -20,6 +20,7 @@ $(document).ready(function(){
     var currentWordDiv = $("#current-word");
     var currentWordIndex = Math.floor(Math.random()*words.length);
     var winMessageDiv = $("#win-message");
+    var guessedDiv = $("#guessed");
 
     var newCurrentWord = function() {
         //Clear #current-word element to make room for new word
@@ -59,15 +60,21 @@ $(document).ready(function(){
     $(document).keyup(function(e) {
         var pressedCharacter = String.fromCharCode(e.which);
         //First, start looping through each letter of currentWord
-        for (var i = 0; i < currentWord.length; i++) {
-            //Check to see if tthe pressed character is present in currentWord
-            if (pressedCharacter == currentWord[i]) {
-                //Define a local variable for the selector of the <div> containing a matched letter
-                var matchedLetterDiv = $("#" + i.toString());
-                //Show that character
-                if (matchedLetterDiv.text() != " ") {
-                    matchedLetterDiv.text(pressedCharacter);
+        if (currentWord.indexOf(pressedCharacter) > -1) {
+            for (var i = 0; i < currentWord.length; i++) {
+                //Check to see if tthe pressed character is present in currentWord
+                if (pressedCharacter == currentWord[i]) {
+                    //Define a local variable for the selector of the <div> containing a matched letter
+                    var matchedLetterDiv = $("#" + i.toString());
+                    //Show that character
+                    if (matchedLetterDiv.text() != " ") {
+                        matchedLetterDiv.text(pressedCharacter);
+                    }
                 }
+            }
+        } else {
+            if (guessedDiv.text().indexOf(pressedCharacter) == -1) {
+                guessedDiv.append("<div>" + pressedCharacter.toUpperCase() + "</div");
             }
         }
         if (currentWordDiv.text() == currentWord) {

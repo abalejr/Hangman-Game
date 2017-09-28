@@ -78,7 +78,8 @@ main {
     padding: 2vw;
     font-size: 2.5vh;
 }
-#current-word {
+#current-word,
+#guessed {
     display: flex;
     flex-direction: row;
     text-align: center;
@@ -86,6 +87,9 @@ main {
 }
 #current-word div {
     border-bottom: 4px solid #0F0CA0;
+    width: 1vw;
+}
+#guessed div {
     width: 1vw;
 }
 footer {
