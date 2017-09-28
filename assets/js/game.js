@@ -3,10 +3,11 @@ $(document).ready(function(){
     var currentWord = "";
     //establish the list of words as a  Global variable
     var words = ["Corneria", "Meteo", "Sector Y", "Fichina", "Katina", "Aquas", "Sector X", "Solar", "Zoness", "Titania", "Macbeth", "Sector Z", "Bolse", "Area Six", "Venom"];
+    var currentWordDiv = $("#current-word");
 
     var newCurrentWord = function() {
         //Clear #current-word element to make room for new word
-        $("#current-word").empty();
+        currentWordDiv.empty();
         //Pick a random word from the list
         var pickedWord = words[Math.floor(Math.random()*words.length)].toUpperCase();
         //Check if pickedWord matches currentWord, and run the next 2 lines of code over and over until that is not the case
@@ -19,7 +20,7 @@ $(document).ready(function(){
         //Start looping through each letter in currentWord
         for (var i = 0; i < currentWord.length; i++) {
             //Add a <div> tag inside the #current-word element for each letter
-            $("#current-word").append("<div id=\"" + i + "\">" + currentWord[i] + "</div>");
+            currentWordDiv.append("<div id=\"" + i + "\">" + currentWord[i] + "</div>");
             //Define a local variable for the selector of the <div> containing the current letter
             var currentLetterDiv = $("#" + i.toString());
             //Check if that div DOES NOT contain a space
@@ -51,13 +52,13 @@ $(document).ready(function(){
                 }
             }
         }
-        if ($("#current-word").text() == currentWord) {
+        if (currentWordDiv.text() == currentWord) {
             $("#win-message").text();
         }
     });
 
     $(document).click(function() {
-        while ($("#current-word").text() == currentWord) {
+        while (currentWordDiv.text() == currentWord) {
             newCurrentWord();
         }
     });
