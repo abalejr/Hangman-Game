@@ -2,18 +2,32 @@ $(document).ready(function(){
     //establish currentWord as a Global Variable
     var currentWord = "";
     //establish the list of words as a  Global variable
-    var words = ["Corneria", "Meteo", "Sector Y", "Fichina", "Katina", "Aquas", "Sector X", "Solar", "Zoness", "Titania", "Macbeth", "Sector Z", "Bolse", "Area Six", "Venom"];
+    var words = [{word:"Corneria", img:"", win:"", song:""},
+                {word:"Meteo", img:"", win:"", song:""},
+                {word:"Sector Y", img:"", win:"", song:""},
+                {word:"Fichina", img:"", win:"", song:""},
+                {word:"Katina", img:"", win:"", song:""},
+                {word:"Aquas", img:"", win:"", song:""},
+                {word:"Sector X", img:"", win:"", song:""},
+                {word:"Solar", img:"", win:"", song:""},
+                {word:"Zoness", img:"", win:"", song:""},
+                {word:"Titania", img:"", win:"", song:""},
+                {word:"Macbeth", img:"", win:"", song:""},
+                {word:"Sector Z", img:"", win:"", song:""},
+                {word:"Bolse", img:"", win:"", song:""},
+                {word:"Area Six", img:"", win:"", song:""},
+                {word:"Venom", img:"", win:"", song:""}];
     var currentWordDiv = $("#current-word");
 
     var newCurrentWord = function() {
         //Clear #current-word element to make room for new word
         currentWordDiv.empty();
         //Pick a random word from the list
-        var pickedWord = words[Math.floor(Math.random()*words.length)].toUpperCase();
+        var pickedWord = words[Math.floor(Math.random()*words.length)].word.toUpperCase();
         //Check if pickedWord matches currentWord, and run the next 2 lines of code over and over until that is not the case
         while (pickedWord == currentWord) {
             //If pickedWord is the same as the currentWord, randomly pick a new one
-            pickedWord = words[Math.floor(Math.random()*words.length)].toUpperCase();
+            pickedWord = words[Math.floor(Math.random()*words.length)].word.toUpperCase();
         }
         //Once pickedWord is different than currentWord, make it the new currentWord
         currentWord = pickedWord;
@@ -58,7 +72,7 @@ $(document).ready(function(){
     });
 
     $(document).click(function() {
-        while (currentWordDiv.text() == currentWord) {
+        if (currentWordDiv.text() == currentWord) {
             newCurrentWord();
         }
     });
