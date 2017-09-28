@@ -71,7 +71,17 @@ main {
     width: 49.7%;
     text-align: center;
     color: #186B2F;
-    padding: 2vw 0 2vw 0;
+    padding: 2vw;
+}
+#current-word {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-between;
+}
+#current-word div {
+    border-bottom: 4px solid #0F0CA0;
+    width: 1vw;
 }
 footer {
     width: 100%;
