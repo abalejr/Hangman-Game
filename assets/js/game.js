@@ -21,13 +21,21 @@ $(document).ready(function(){
     var currentWordIndex = Math.floor(Math.random()*words.length);
     var winMessageDiv = $("#win-message");
     var guessedDiv = $("#guessed");
+    var guessLeftDiv = $("#guess-left");
+    var winsSpan = $("#wins");
+    var wins = 0;
+    var guessLeft = 0;
+    console.log(guessLeft);
 
     var newCurrentWord = function() {
-        //Clear #current-word element to make room for new word
+        //Clear #current-word to make room for new word
         currentWordDiv.empty();
-        //Check if pickedWord matches currentWord, and run the next 2 lines of code over and over until that is not the case
+        guessedDiv.empty();
+        guessLeft = 6;
+        guessLeftDiv.text(guessLeft);
         //Pick a random word from the list
         var pickedWord = words[currentWordIndex].word.toUpperCase();
+        //Check if pickedWord matches currentWord, and run the next 2 lines of code over and over until that is not the case
         while (pickedWord == currentWord) {
             //If pickedWord is the same as the currentWord, randomly pick a new one
             currentWordIndex = Math.floor(Math.random()*words.length);
@@ -46,6 +54,7 @@ $(document).ready(function(){
                 //Remove the letter from the div if it is not a space
                 currentLetterDiv.empty();
             } else {
+                //If it is a space, remove the border from the div
                 currentLetterDiv.attr("style", "border-bottom: 0");
             }
         }
@@ -58,27 +67,46 @@ $(document).ready(function(){
 
     //Listen for keyboard key to be released
     $(document).keyup(function(e) {
-        var pressedCharacter = String.fromCharCode(e.which);
-        //First, start looping through each letter of currentWord
-        if (currentWord.indexOf(pressedCharacter) > -1) {
-            for (var i = 0; i < currentWord.length; i++) {
-                //Check to see if tthe pressed character is present in currentWord
-                if (pressedCharacter == currentWord[i]) {
-                    //Define a local variable for the selector of the <div> containing a matched letter
-                    var matchedLetterDiv = $("#" + i.toString());
-                    //Show that character
-                    if (matchedLetterDiv.text() != " ") {
-                        matchedLetterDiv.text(pressedCharacter);
+        //Check if the key pressed is a letter
+        if (47 < e.which && e.which < 91) {
+            //if so, convert that letter to a string
+            var pressedLetter = String.fromCharCode(e.which);
+            //First, start looping through each letter of currentWord
+            if (currentWord.indexOf(pressedLetter) > -1) {
+                for (var i = 0; i < currentWord.length; i++) {
+                    //Check to see if the pressed character is present in currentWord
+                    if (pressedLetter == currentWord[i]) {
+                        //Define a local variable for the selector of the <div> containing a matched letter
+                        var matchedLetterDiv = $("#" + i.toString());
+                        //Unless that charachter is a space, show that character
+                        if (matchedLetterDiv.text() != " ") {
+                            matchedLetterDiv.text(pressedLetter);
+                        }
                     }
                 }
+            //If there is no match...
+            } else {
+                //Check if the letter has already been pressed
+                if (guessedDiv.text().indexOf(pressedLetter) == -1) {
+                    //If not, reduce the number of guesses left, and
+                    guessLeft -= 1;
+                    //update that on the page
+                    guessLeftDiv.text(guessLeft);
+                    //then, add a new div with that letter in it
+                    guessedDiv.append("<div>" + pressedLetter + "</div");
+                }
+                if (guessLeft == 0) {
+                    winMessageDiv.html("Mission Failed<br><div id=\"win-sub\">Click Anywhere for a New Word.</div>");
+                }
             }
-        } else {
-            if (guessedDiv.text().indexOf(pressedCharacter) == -1) {
-                guessedDiv.append("<div>" + pressedCharacter.toUpperCase() + "</div");
+            //Check if the word has been completed
+            if (currentWordDiv.text() == currentWord) {
+                //If so, increase the number of wins by 1 and update that on the page
+                wins += 1;
+                winsSpan.text(wins);
+                //replace #win-message with the win property of the current word and the Click for New Word message
+                winMessageDiv.html(words[currentWordIndex].win + "<br><div id=\"win-sub\">Click Anywhere for a New Word.</div>");
             }
-        }
-        if (currentWordDiv.text() == currentWord) {
-            winMessageDiv.html(words[currentWordIndex].win + "<br><div id=\"win-sub\">Click Anywhere for a New Word.</div>");
         }
     });
 
