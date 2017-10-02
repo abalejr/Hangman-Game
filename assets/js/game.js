@@ -1,20 +1,20 @@
 $(document).ready(function(){
     //establish the list of words as a  Global variable
-    var words = [{word:"Corneria", img:"assets/img/Corneria.jpg", win:"Former Army Base", song:""},
-                {word:"Meteo", img:"assets/img/Meteo.jpg", win:"Ateroid Belt", song:""},
-                {word:"Sector Y", img:"assets/img/Sectory.jpg", win:"Enter Star Wolf", song:""},
-                {word:"Fichina", img:"assets/img/Fichina.jpg", win:"Former Defense Base", song:""},
-                {word:"Katina", img:"assets/img/Katina.jpg", win:"Frontline Base", song:""},
-                {word:"Aquas", img:"assets/img/Aquas.jpg", win:"Terror of the Deep", song:""},
-                {word:"Sector X", img:"assets/img/Sectorx.jpg", win:"Space Base", song:""},
-                {word:"Solar", img:"assets/img/Solar.jpg", win:"The Sun", song:""},
-                {word:"Zoness", img:"assets/img/Zoness.jpg", win:"Toxic Waste Area", song:""},
-                {word:"Titania", img:"assets/img/Titania.jpg", win:"Arid Desert", song:""},
-                {word:"Macbeth", img:"assets/img/Macbeth.jpg", win:"Venom Army Supply Base", song:""},
-                {word:"Sector Z", img:"assets/img/Sectorz.jpg", win:"Great Fox Ambush", song:""},
-                {word:"Bolse", img:"assets/img/Bolse.jpg", win:"The Last Hurrah", song:""},
-                {word:"Area Six", img:"assets/img/Area6.jpg", win:"Defense Station", song:""},
-                {word:"Venom", img:"assets/img/Venom.jpg", win:"Andross' Homeworld", song:""}];
+    var words = [{word:"Corneria", img:"assets/img/Corneria.jpg", win:"Former Army Base", song:"assets/audio/09-corneria.mp3"},
+                {word:"Meteo", img:"assets/img/Meteo.jpg", win:"Ateroid Belt", song:"assets/audio/11-meteo.mp3"},
+                {word:"Sector Y", img:"assets/img/Sectory.jpg", win:"Enter Star Wolf", song:"assets/audio/12-sector-y-and-solar.mp3"},
+                {word:"Fichina", img:"assets/img/Fichina.jpg", win:"Former Defense Base", song:"assets/audio/10-fichina-and-sector-z.mp3"},
+                {word:"Katina", img:"assets/img/Katina.jpg", win:"Frontline Base", song:"assets/audio/13-katarina.mp3"},
+                {word:"Aquas", img:"assets/img/Aquas.jpg", win:"Terror of the Deep", song:"assets/audio/14-aquas.mp3"},
+                {word:"Sector X", img:"assets/img/Sectorx.jpg", win:"Space Base", song:"assets/audio/15-sector-x.mp3"},
+                {word:"Solar", img:"assets/img/Solar.jpg", win:"The Sun", song:"assets/audio/12-sector-y-and-solar.mp3"},
+                {word:"Zoness", img:"assets/img/Zoness.jpg", win:"Toxic Waste Area", song:"assets/audio/16-zoness.mp3"},
+                {word:"Titania", img:"assets/img/Titania.jpg", win:"Arid Desert", song:"assets/audio/17-titania-and-macbeth.mp3"},
+                {word:"Macbeth", img:"assets/img/Macbeth.jpg", win:"Venom Army Supply Base", song:"assets/audio/17-titania-and-macbeth.mp3"},
+                {word:"Sector Z", img:"assets/img/Sectorz.jpg", win:"Great Fox Ambush", song:"assets/audio/10-fichina-and-sector-z.mp3"},
+                {word:"Bolse", img:"assets/img/Bolse.jpg", win:"The Last Hurrah", song:"assets/audio/19-bolse.mp3"},
+                {word:"Area Six", img:"assets/img/Area6.jpg", win:"Defense Station", song:"assets/audio/18-area-6.mp3"},
+                {word:"Venom", img:"assets/img/Venom.jpg", win:"Andross' Homeworld", song:"assets/audio/20-venom.mp3"}];
     //establish currentWord and its div as Global Variables
     var currentWord = "";
     var currentWordDiv = $("#current-word");
@@ -23,9 +23,10 @@ $(document).ready(function(){
     var guessedDiv = $("#guessed");
     var guessLeftDiv = $("#guess-left");
     var winsSpan = $("#wins");
+    var displayDiv = $("#display");
+    var song = $("#song");
     var wins = 0;
     var guessLeft = 6;
-    console.log(guessLeft);
 
     var NewCurrentWord = function() {
         //Clear #current-word to make room for new word
@@ -41,9 +42,12 @@ $(document).ready(function(){
             currentWordIndex = Math.floor(Math.random()*words.length);
             pickedWord = words[currentWordIndex].word.toUpperCase();
         }
-        //Once pickedWord is different than currentWord, make it the new currentWord
+        //Once pickedWord is different than currentWord, make it the new currentWord and...
         currentWord = pickedWord;
-        $("#display").html("<img src=\"" + words[currentWordIndex].img + "\" />");
+        //Display the image for the current word and...
+        displayDiv.html("<img src=\"" + words[currentWordIndex].img + "\" />");
+        //Play the song for the current word
+        song.attr("src", words[currentWordIndex].song);
         //Start looping through each letter in currentWord
         for (var i = 0; i < currentWord.length; i++) {
             //Add a <div> tag inside the #current-word element for each letter
@@ -59,8 +63,6 @@ $(document).ready(function(){
                 currentLetterDiv.attr("style", "border-bottom: 0");
             }
         }
-        //Output currentWord to console to test function
-        console.log(currentWord);
     };
     //Run this when the page loads, so players can jump in right away
     NewCurrentWord();
@@ -99,8 +101,10 @@ $(document).ready(function(){
                     }
                     //Check if there are no guesses left
                     if (guessLeft == 0) {
-                        //if so, 
+                        //if so, display the Mission Failed and Click for New Word messages and...
                         winMessageDiv.html("Mission Failed <br><div id=\"win-sub\">Click Anywhere for a New Word.</div>");
+                        //Play the Mission Failed music
+                        song.attr("src", "assets/audio/35-mission-failed.mp3");
                     }
                 }
                 //Check if the word has been completed
@@ -108,8 +112,10 @@ $(document).ready(function(){
                     //If so, increase the number of wins by 1 and update that on the page
                     wins += 1;
                     winsSpan.text(wins);
-                    //replace #win-message with the win property of the current word and the Click for New Word message
+                    //replace #win-message with the win property of the current word and the Click for New Word message and...
                     winMessageDiv.html(words[currentWordIndex].win + "<br><div id=\"win-sub\">Click Anywhere for a New Word.</div>");
+                    //play the Mission Accomplished music
+                    song.attr("src", "assets/audio/34-mission-accomplished.mp3");
                 }
             }
         }
