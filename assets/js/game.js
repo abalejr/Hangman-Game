@@ -97,7 +97,7 @@ $(document).ready(function(){
                         //update that on the page
                         guessLeftDiv.text(guessLeft);
                         //then, add a new div with that letter in it
-                        guessedDiv.append("<div>" + pressedLetter + "</div");
+                        guessedDiv.append("<div>" + pressedLetter + "</div>");
                     }
                     //Check if there are no guesses left
                     if (guessLeft == 0) {
